@@ -18,14 +18,14 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
-Route::get('/', function(){
+Route::get('/', function () {
     return view('posts', [
         'posts' => Post::all()
     ]);
 });
 
-Route::get('/posts/{post}', function($slug){
+Route::get('/posts/{post}', function ($slug) {
     return view('post', [
-        'post' => Post::find($slug)
+        'post' => Post::findOrFail($slug)
     ]);
-})->where('post', '[A-z_\-]+');
+});
