@@ -9,6 +9,8 @@
 
     @if($posts->count())
         @include('layouts.posts-grid', ['post' => $posts])
+
+        {{ $posts-> links() }}
     @else
         <p class="text-center">No posts yet. Please check later.</p>
     @endif
