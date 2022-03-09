@@ -20,6 +20,14 @@ class Post extends Model
             ->where('title', 'like', '%' . $search . '%') // This uses SQL commands
             ->orWhere('body', 'like', '%' . $search . '%'); // This uses SQL commands
         });
+        
+        $query->when($filters['category'] ?? false, function ($query, $category) {
+            $query->whereHas(
+                'category',
+                fn ($query) =>
+                    $query->where('slug', $category)
+            ); // This uses SQL commands
+        });
     }
 
     public function category()
