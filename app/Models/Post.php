@@ -28,6 +28,14 @@ class Post extends Model
                     $query->where('slug', $category)
             ); // This uses SQL commands
         });
+                
+        $query->when($filters['author'] ?? false, function ($query, $author) {
+            $query->whereHas(
+                'author',
+                fn ($query) =>
+                    $query->where('username', $author)
+            ); // This uses SQL commands
+        });
     }
 
     public function category()
